@@ -61,12 +61,15 @@ const Banner = () => {
                 career change in order to professionally pursue a passion of
                 mine - web development. Hopefully this portfolio page will give
                 you a brief idea of what I can do, but if you want to know more,
-                you can either find me via the LinkedIn or GitHub links above or
-                you can get in contact by clicking the button below.
+                please feel free to connect via the LinkedIn button below.
               </p>
-              <button onClick={() => console.log("connect")}>
+              {/* <button onClick={() => console.log("connect")}>
                 Let's connect <ArrowRightCircle size={25} />{" "}
-              </button>
+              </button> */}
+
+              <a href="https://linkedin.com/in/hari-pace">
+                Find me on LinkedIn <ArrowRightCircle size={25} />{" "}
+              </a>
             </Col>
             <Col xs={12} md={6} xl={5}>
               <img src={Hari} alt="Header img" className="banner-img" />

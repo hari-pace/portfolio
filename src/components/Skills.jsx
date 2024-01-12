@@ -11,6 +11,7 @@ import Node from "../assets/img/node.svg";
 import Express from "../assets/img/express.svg";
 import Postgres from "../assets/img/postgresql.svg";
 import MongoDB from "../assets/img/mongodb.svg";
+import MySQL from "../assets/img/mysql.svg";
 
 const Skills = () => {
   const responsive = {
@@ -96,6 +97,10 @@ const Skills = () => {
                   infinite={true}
                   className="skill-slider"
                 >
+                  <div className="item">
+                    <img src={MySQL} alt="image" />
+                    <h5>MySQL</h5>
+                  </div>
                   <div className="item">
                     <img src={Postgres} alt="image" />
                     <h5>PostgreSQL</h5>

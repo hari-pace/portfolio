@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLocation } from "react";
 import Logo from "../assets/img/hari1.jpg";
 import Github from "../assets/img/github.png";
 import LinkedIn from "../assets/img/linkedin.svg";
@@ -31,11 +31,32 @@ const NavBar = () => {
     setActiveLink(value);
   };
 
+  const ScrollToTop = () => {
+    // Extracts pathname property(key) from an object
+    const { pathname } = useLocation();
+
+    // Automatically scrolls to top whenever pathname changes
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+  };
+
   return (
     <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
       <Container>
         <Navbar.Brand href="#home">
-          <img src={Logo} alt="Logo" height="100px" className="navbar-logo" />
+          <img
+            src={Logo}
+            alt="Logo"
+            height="100px"
+            className="navbar-logo"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              })
+            }
+          />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
           <span className="navbar-toggler-icon"></span>
@@ -85,9 +106,9 @@ const NavBar = () => {
                 <img src={LinkedIn} alt="linkedin" />
               </a>
             </div>
-            <button className="vvd" onClick={() => console.log("connect")}>
+            {/* <button className="vvd" onClick={() => console.log("connect")}>
               <span>Let's Connect</span>
-            </button>
+            </button> */}
           </span>
         </Navbar.Collapse>
       </Container>
