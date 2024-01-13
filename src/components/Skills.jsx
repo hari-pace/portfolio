@@ -12,6 +12,8 @@ import Express from "../assets/img/express.svg";
 import Postgres from "../assets/img/postgresql.svg";
 import MongoDB from "../assets/img/mongodb.svg";
 import MySQL from "../assets/img/mysql.svg";
+import "animate.css";
+import TrackVisibility from "react-on-screen";
 
 const Skills = () => {
   const responsive = {
@@ -41,7 +43,20 @@ const Skills = () => {
           <Row>
             <Col>
               <div className="skill-bx">
-                <h1>Skills</h1>
+                <TrackVisibility>
+                  {({ isVisible }) => (
+                    <div
+                      className={
+                        isVisible
+                          ? "animate__animated animate__fadeInLeftBig "
+                          : ""
+                      }
+                    >
+                      <h1>Skills</h1>
+                    </div>
+                  )}
+                </TrackVisibility>
+
                 <p>
                   Through a mix of school-based learning during my 17-week
                   course at WBS Coding School, along with a lot of

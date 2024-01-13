@@ -5,6 +5,8 @@ import Mountains from "../assets/img/mountains.jpg";
 import TeamUp from "../assets/img/TeamUp-screenshot4.png";
 import SamsQuizzes from "../assets/img/Sams-quizzes-screenshot2.png";
 import Pokefight from "../assets/img/Pokefight-screenshot2.png";
+import "animate.css";
+import TrackVisibility from "react-on-screen";
 
 const Projects = () => {
   const projects = [
@@ -41,7 +43,20 @@ const Projects = () => {
       <section className="project" id="projects">
         <Container>
           <Col>
-            <h2>Projects</h2>
+            <TrackVisibility>
+              {({ isVisible }) => (
+                <div
+                  className={
+                    isVisible
+                      ? "animate__animated animate__fadeInRightBig "
+                      : ""
+                  }
+                >
+                  <h2>Projects</h2>
+                </div>
+              )}
+            </TrackVisibility>
+
             <p>
               A selection of projects created either alone or during my time at
               WBS Coding School.

@@ -3,6 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import Hari from "../assets/img/hari3.jpg";
 import { useState, useEffect } from "react";
+import "animate.css";
+import TrackVisibility from "react-on-screen";
 
 const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
@@ -53,10 +55,22 @@ const Banner = () => {
         <Container>
           <Row className="align-items-center">
             <Col xs={12} md={6} xl={7}>
-              <h1>{`Hi, I'm Hari`} </h1>
+              <TrackVisibility>
+                {({ isVisible }) => (
+                  <div
+                    className={
+                      isVisible
+                        ? "animate__animated animate__bounce  animate__delay-2s "
+                        : ""
+                    }
+                  >
+                    <h1>{`Hi, I'm Hari`} </h1>
+                  </div>
+                )}
+              </TrackVisibility>
               <span className="tagline">💻 Full-Stack Web Developer</span>
               <span className="tagline">📍 Munich, DE</span>
-              <p>
+              <p className="banner-text">
                 Since leaving the UK for Munich in 2019, I have completed a
                 career change in order to professionally pursue a passion of
                 mine - web development. Hopefully this portfolio page will give
@@ -67,7 +81,10 @@ const Banner = () => {
                 Let's connect <ArrowRightCircle size={25} />{" "}
               </button> */}
 
-              <a href="https://linkedin.com/in/hari-pace">
+              <a
+                className="banner-link"
+                href="https://linkedin.com/in/hari-pace"
+              >
                 Find me on LinkedIn <ArrowRightCircle size={25} />{" "}
               </a>
             </Col>

@@ -23,6 +23,10 @@ const Contact = () => {
     });
   };
 
+  const handleSubmit = () => {
+
+  }
+
   return (
     <div>
       <section className="contact" id="connect">
@@ -33,7 +37,7 @@ const Contact = () => {
             </Col>
             <Col md={6}>
               <h2>Get in touch</h2>
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <Row>
                   <Col sm={6} className="px-1">
                     <input
