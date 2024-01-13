@@ -93,13 +93,13 @@ const NavBar = () => {
           </Nav>
           <span className="navbar-text">
             <div className="social-icon">
-              <a href="https://github.com/hari-pace">
+              <a href="https://github.com/hari-pace" target="blank">
                 {/* <div>
                   <FontAwesomeIcon icon={faGithub} />
                 </div> */}
                 <img src={Github} alt="github" />
               </a>
-              <a href="https://linkedin.com/in/hari-pace">
+              <a href="https://linkedin.com/in/hari-pace" target="blank">
                 {/* <div>
                   <FontAwesomeIcon icon={faLinkedin} />
                 </div> */}

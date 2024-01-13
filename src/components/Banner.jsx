@@ -84,6 +84,7 @@ const Banner = () => {
               <a
                 className="banner-link"
                 href="https://linkedin.com/in/hari-pace"
+                target="blank"
               >
                 Find me on LinkedIn <ArrowRightCircle size={25} />{" "}
               </a>
