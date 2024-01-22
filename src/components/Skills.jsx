@@ -5,6 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import ReactLogo from "../assets/img/react-black.svg";
 import HTML from "../assets/img/html-black.svg";
 import JS from "../assets/img/js-black.svg";
+import TS from "../assets/img/typescript.svg";
 import CSS from "../assets/img/CSS.svg";
 import Tailwind from "../assets/img/tailwind.svg";
 import Node from "../assets/img/node.svg";
@@ -12,6 +13,7 @@ import Express from "../assets/img/express.svg";
 import Postgres from "../assets/img/postgresql.svg";
 import MongoDB from "../assets/img/mongodb.svg";
 import MySQL from "../assets/img/mysql.svg";
+import Firebase from "../assets/img/firebase.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 
@@ -83,6 +85,10 @@ const Skills = () => {
                     <h5>JavaScript</h5>
                   </div>
                   <div className="item">
+                    <img src={TS} alt="image" />
+                    <h5>TypeScript</h5>
+                  </div>
+                  <div className="item">
                     <img src={ReactLogo} alt="image" />
                     <h5>React.js</h5>
                   </div>
@@ -123,6 +129,10 @@ const Skills = () => {
                   <div className="item">
                     <img src={MongoDB} alt="image" />
                     <h5>MongoDB</h5>
+                  </div>
+                  <div className="item">
+                    <img src={Firebase} alt="image" />
+                    <h5>Firebase</h5>
                   </div>
                 </Carousel>
               </div>
