@@ -14,6 +14,9 @@ import Postgres from "../assets/img/postgresql.svg";
 import MongoDB from "../assets/img/mongodb.svg";
 import MySQL from "../assets/img/mysql.svg";
 import Firebase from "../assets/img/firebase.svg";
+import Dart from "../assets/img/dart.svg";
+import Flutter from "../assets/img/flutter.svg";
+import NextJS from "../assets/img/nextjs.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 
@@ -93,8 +96,20 @@ const Skills = () => {
                     <h5>React.js</h5>
                   </div>
                   <div className="item">
+                    <img src={NextJS} alt="image" />
+                    <h5>NextJS</h5>
+                  </div>
+                  <div className="item">
                     <img src={Tailwind} alt="image" />
                     <h5>TailwindCSS</h5>
+                  </div>
+                  <div className="item">
+                    <img src={Dart} alt="image" />
+                    <h5>Dart</h5>
+                  </div>
+                  <div className="item">
+                    <img src={Flutter} alt="image" />
+                    <h5>Flutter</h5>
                   </div>
                 </Carousel>
                 <h2>Backend</h2>
@@ -110,6 +125,10 @@ const Skills = () => {
                   <div className="item">
                     <img src={Express} alt="image" />
                     <h5>Express.js</h5>
+                  </div>
+                  <div className="item">
+                    <img src={Firebase} alt="image" />
+                    <h5>Firebase</h5>
                   </div>
                 </Carousel>
                 <h2>Databases</h2>
@@ -129,10 +148,6 @@ const Skills = () => {
                   <div className="item">
                     <img src={MongoDB} alt="image" />
                     <h5>MongoDB</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Firebase} alt="image" />
-                    <h5>Firebase</h5>
                   </div>
                 </Carousel>
               </div>
