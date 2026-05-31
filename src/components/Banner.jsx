@@ -8,6 +8,10 @@ const ROLES = [
   "Full-Stack Web Developer",
   "React Enthusiast",
   "Problem Solver",
+  "Pixel-Perfect Perfectionist",
+  "Professional Claude Utiliser",
+  "Bug Creator & Destroyer",
+  "console.log() Archaeologist",
 ];
 
 const Banner = () => {
