@@ -1,45 +1,47 @@
-import React from "react";
-import { Col, Row, Container } from "react-bootstrap";
-import Logo from "../assets/img/hari1.jpg";
-import Github from "../assets/img/github.png";
+import { Container } from "react-bootstrap";
+import Logo    from "../assets/img/hari1.jpg";
+import Github  from "../assets/img/github.png";
 import LinkedIn from "../assets/img/linkedin.svg";
 
-const Footer = () => {
-  return (
-    <div>
-      <footer className="footer">
-        <Container>
-          <Row className="align-item-center">
-            <Col sm={1} id="footer-logo">
-              <img
-                src={Logo}
-                alt="Logo"
-                height="100px"
-                className="navbar-logo"
-                onClick={() =>
-                  window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                  })
-                }
-              />
-            </Col>
-            <Col sm={11} className="text-center text-sm-end">
-              <div className="social-icon">
-                <a href="https://github.com/hari-pace">
-                  <img src={Github} alt="" />
-                </a>
-                <a href="https://linkedin.com/in/hari-pace">
-                  <img src={LinkedIn} alt="" />
-                </a>
-              </div>
-              <p id="footer-line">Created by Hari Pace, 2024</p>
-            </Col>
-          </Row>
-        </Container>
-      </footer>
-    </div>
-  );
-};
+const Footer = () => (
+  <footer className="site-footer">
+    <Container>
+      <div className="footer-inner">
+        <button
+          style={{ background: "none", border: "none", padding: 0 }}
+          aria-label="Scroll to top"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <img src={Logo} alt="Hari Pace" className="footer-logo" />
+        </button>
+
+        <p className="footer-copy">
+          &copy; {new Date().getFullYear()} Hari Pace. All rights reserved.
+        </p>
+
+        <div className="footer-social">
+          <a
+            href="https://github.com/hari-pace"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-btn"
+            aria-label="GitHub profile"
+          >
+            <img src={Github} alt="" aria-hidden="true" />
+          </a>
+          <a
+            href="https://linkedin.com/in/hari-pace"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-btn"
+            aria-label="LinkedIn profile"
+          >
+            <img src={LinkedIn} alt="" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </Container>
+  </footer>
+);
 
 export default Footer;

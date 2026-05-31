@@ -1,106 +1,159 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { useInView } from "../hooks/useInView";
 import contactImg from "../assets/img/hari3.jpg";
 
+const INITIAL = {
+  firstName: "",
+  lastName:  "",
+  email:     "",
+  phone:     "",
+  message:   "",
+};
+
 const Contact = () => {
-  const formInitialDetails = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    message: "",
+  const [ref, inView]     = useInView();
+  const [form, setForm]   = useState(INITIAL);
+  const [status, setStatus] = useState(null); // null | "success" | "error"
+  const [btnText, setBtnText] = useState("Send Message");
+
+  const update = (field, value) => setForm((f) => ({ ...f, [field]: value }));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { firstName, lastName, email, phone, message } = form;
+    if (!firstName || !email || !message) {
+      setStatus("error");
+      return;
+    }
+
+    const subject = encodeURIComponent(`Portfolio enquiry from ${firstName} ${lastName}`);
+    const body    = encodeURIComponent(
+      `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\n\n${message}`
+    );
+    window.open(`mailto:hari.pace@example.com?subject=${subject}&body=${body}`);
+
+    setBtnText("Sent!");
+    setStatus("success");
+    setForm(INITIAL);
+    setTimeout(() => { setBtnText("Send Message"); setStatus(null); }, 4000);
   };
-
-  const [formDetails, setFormDetails] = useState(formInitialDetails);
-  const [buttonText, setButtonText] = useState("Send");
-  const [status, setStatus] = useState({});
-
-  const onFormUpdate = (category, value) => {
-    setFormDetails({
-      ...formDetails,
-      [category]: value,
-    });
-  };
-
-  const handleSubmit = () => {
-
-  }
 
   return (
-    <div>
-      <section className="contact" id="connect">
-        <Container>
-          <Row className="align-items-center">
-            <Col md={6}>
-              <img src={contactImg} alt="Contact Me" />
-            </Col>
-            <Col md={6}>
-              <h2>Get in touch</h2>
-              <form onSubmit={handleSubmit}>
-                <Row>
-                  <Col sm={6} className="px-1">
+    <section className="contact-section" id="contact" aria-label="Contact">
+      <Container>
+        <Row className="align-items-center g-5">
+          <Col md={5} className="d-none d-md-block">
+            <img
+              src={contactImg}
+              alt="Hari Pace"
+              className="contact-img"
+            />
+          </Col>
+
+          <Col md={7}>
+            <div
+              ref={ref}
+              className={`reveal reveal--right${inView ? " is-visible" : ""}`}
+            >
+              <h2 className="section-heading gradient-text" style={{ marginBottom: "0.4rem" }}>
+                Get in Touch
+              </h2>
+              <p className="section-subtext" style={{ marginBottom: "1.75rem" }}>
+                Have a project in mind or just want to say hello? Drop me a line.
+              </p>
+
+              <form
+                className="contact-form"
+                onSubmit={handleSubmit}
+                noValidate
+                aria-label="Contact form"
+              >
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="firstName">First name *</label>
                     <input
+                      id="firstName"
                       type="text"
-                      value={formDetails.firstName}
-                      placeholder="First name"
-                      onChange={(e) =>
-                        onFormUpdate("firstName", e.target.value)
-                      }
+                      value={form.firstName}
+                      placeholder="Jane"
+                      required
+                      autoComplete="given-name"
+                      onChange={(e) => update("firstName", e.target.value)}
                     />
-                  </Col>
-                  <Col sm={6} className="px-1">
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="lastName">Last name</label>
                     <input
+                      id="lastName"
                       type="text"
-                      value={formDetails.lastName}
-                      placeholder="Last name"
-                      onChange={(e) => onFormUpdate("lastName", e.target.value)}
+                      value={form.lastName}
+                      placeholder="Doe"
+                      autoComplete="family-name"
+                      onChange={(e) => update("lastName", e.target.value)}
                     />
-                  </Col>
-                  <Col sm={6} className="px-1">
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="email">Email address *</label>
                     <input
+                      id="email"
                       type="email"
-                      value={formDetails.email}
-                      placeholder="Email address"
-                      onChange={(e) => onFormUpdate("email", e.target.value)}
+                      value={form.email}
+                      placeholder="jane@example.com"
+                      required
+                      autoComplete="email"
+                      onChange={(e) => update("email", e.target.value)}
                     />
-                  </Col>
-                  <Col sm={6} className="px-1">
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Phone (optional)</label>
                     <input
+                      id="phone"
                       type="tel"
-                      value={formDetails.phone}
-                      placeholder="Phone number"
-                      onChange={(e) => onFormUpdate("phone", e.target.value)}
+                      value={form.phone}
+                      placeholder="+49 123 456 789"
+                      autoComplete="tel"
+                      onChange={(e) => update("phone", e.target.value)}
                     />
-                  </Col>
-                  <Col>
-                    <textarea
-                      row="6"
-                      value={formDetails.message}
-                      placeholder="Message"
-                      onChange={(e) => onFormUpdate("message", e.target.value)}
-                    ></textarea>
-                    <button type="submit">
-                      <span>{buttonText}</span>
-                    </button>
-                  </Col>
-                  status.message &&
-                  <Col>
-                    <p
-                      className={
-                        status.success === false ? "danger" : "success"
-                      }
-                    >
-                      {status.message}
-                    </p>
-                  </Col>
-                </Row>
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="message">Message *</label>
+                  <textarea
+                    id="message"
+                    rows={5}
+                    value={form.message}
+                    placeholder="Your message..."
+                    required
+                    onChange={(e) => update("message", e.target.value)}
+                  />
+                </div>
+
+                {status === "success" && (
+                  <p className="form-status success" role="status">
+                    Thanks! Your email client should open shortly.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="form-status error" role="alert">
+                    Please fill in the required fields (first name, email, message).
+                  </p>
+                )}
+
+                <button type="submit" className="btn-primary">
+                  {btnText}
+                </button>
               </form>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 };
 

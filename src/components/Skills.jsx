@@ -1,161 +1,87 @@
-import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import { Container } from "react-bootstrap";
+import { useInView } from "../hooks/useInView";
 import ReactLogo from "../assets/img/react-black.svg";
-import HTML from "../assets/img/html-black.svg";
-import JS from "../assets/img/js-black.svg";
-import TS from "../assets/img/typescript.svg";
-import CSS from "../assets/img/CSS.svg";
+import HTML    from "../assets/img/html-black.svg";
+import JS      from "../assets/img/js-black.svg";
+import TS      from "../assets/img/typescript.svg";
+import CSS     from "../assets/img/CSS.svg";
 import Tailwind from "../assets/img/tailwind.svg";
-import Node from "../assets/img/node.svg";
+import Node    from "../assets/img/node.svg";
 import Express from "../assets/img/express.svg";
 import Postgres from "../assets/img/postgresql.svg";
-import MongoDB from "../assets/img/mongodb.svg";
-import MySQL from "../assets/img/mysql.svg";
+import MongoDB  from "../assets/img/mongodb.svg";
+import MySQL   from "../assets/img/mysql.svg";
 import Firebase from "../assets/img/firebase.svg";
-import Dart from "../assets/img/dart.svg";
+import Dart    from "../assets/img/dart.svg";
 import Flutter from "../assets/img/flutter.svg";
-import NextJS from "../assets/img/nextjs.svg";
-import "animate.css";
-import TrackVisibility from "react-on-screen";
+import NextJS  from "../assets/img/nextjs.svg";
+
+const FRONTEND = [
+  { name: "HTML5",       icon: HTML },
+  { name: "CSS3",        icon: CSS },
+  { name: "JavaScript",  icon: JS },
+  { name: "TypeScript",  icon: TS },
+  { name: "React.js",    icon: ReactLogo },
+  { name: "Next.js",     icon: NextJS },
+  { name: "TailwindCSS", icon: Tailwind },
+  { name: "Dart",        icon: Dart },
+  { name: "Flutter",     icon: Flutter },
+];
+
+const BACKEND = [
+  { name: "Node.js",    icon: Node },
+  { name: "Express.js", icon: Express },
+  { name: "Firebase",   icon: Firebase },
+];
+
+const DATABASES = [
+  { name: "MySQL",      icon: MySQL },
+  { name: "PostgreSQL", icon: Postgres },
+  { name: "MongoDB",    icon: MongoDB },
+];
+
+const SkillGroup = ({ label, skills }) => (
+  <div className="skills-category">
+    <p className="skills-category-label">{label}</p>
+    <div className="skills-grid">
+      {skills.map(({ name, icon }) => (
+        <div key={name} className="skill-chip">
+          <img src={icon} alt="" aria-hidden="true" />
+          <span>{name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 const Skills = () => {
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
+  const [ref, inView] = useInView();
 
   return (
-    <div>
-      <section className="skill" id="skills">
-        <Container>
-          <Row>
-            <Col>
-              <div className="skill-bx">
-                <TrackVisibility>
-                  {({ isVisible }) => (
-                    <div
-                      className={
-                        isVisible
-                          ? "animate__animated animate__fadeInLeftBig "
-                          : ""
-                      }
-                    >
-                      <h1>Skills</h1>
-                    </div>
-                  )}
-                </TrackVisibility>
+    <section className="skills-section" id="skills" aria-label="Skills">
+      <Container>
+        <div
+          ref={ref}
+          className={`reveal${inView ? " is-visible" : ""}`}
+        >
+          <h2 className="section-heading gradient-text">Skills</h2>
+          <p className="section-subtext">
+            Through a mix of school-based learning during my 17-week course at
+            WBS Coding School, along with lots of self-learning, I have built
+            the following technical skill set.
+          </p>
+        </div>
 
-                <p>
-                  Through a mix of school-based learning during my 17-week
-                  course at WBS Coding School, along with a lot of
-                  self-learning, I currently have the following technical
-                  skillset.
-                </p>
-
-                <h2>Frontend</h2>
-                <Carousel
-                  responsive={responsive}
-                  infinite={true}
-                  className="skill-slider"
-                >
-                  <div className="item">
-                    <img src={HTML} alt="image" />
-                    <h5>HTML5</h5>
-                  </div>
-                  <div className="item">
-                    <img src={CSS} alt="image" />
-                    <h5>CSS3</h5>
-                  </div>
-                  <div className="item">
-                    <img src={JS} alt="image" />
-                    <h5>JavaScript</h5>
-                  </div>
-                  <div className="item">
-                    <img src={TS} alt="image" />
-                    <h5>TypeScript</h5>
-                  </div>
-                  <div className="item">
-                    <img src={ReactLogo} alt="image" />
-                    <h5>React.js</h5>
-                  </div>
-                  <div className="item">
-                    <img src={NextJS} alt="image" />
-                    <h5>NextJS</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Tailwind} alt="image" />
-                    <h5>TailwindCSS</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Dart} alt="image" />
-                    <h5>Dart</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Flutter} alt="image" />
-                    <h5>Flutter</h5>
-                  </div>
-                </Carousel>
-                <h2>Backend</h2>
-                <Carousel
-                  responsive={responsive}
-                  infinite={true}
-                  className="skill-slider"
-                >
-                  <div className="item">
-                    <img src={Node} alt="image" />
-                    <h5>Node.js</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Express} alt="image" />
-                    <h5>Express.js</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Firebase} alt="image" />
-                    <h5>Firebase</h5>
-                  </div>
-                </Carousel>
-                <h2>Databases</h2>
-                <Carousel
-                  responsive={responsive}
-                  infinite={true}
-                  className="skill-slider"
-                >
-                  <div className="item">
-                    <img src={MySQL} alt="image" />
-                    <h5>MySQL</h5>
-                  </div>
-                  <div className="item">
-                    <img src={Postgres} alt="image" />
-                    <h5>PostgreSQL</h5>
-                  </div>
-                  <div className="item">
-                    <img src={MongoDB} alt="image" />
-                    <h5>MongoDB</h5>
-                  </div>
-                </Carousel>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    </div>
+        <div
+          className={`reveal-stagger${inView ? " is-visible" : ""}`}
+          style={{ transitionDelay: "0.15s" }}
+        >
+          <SkillGroup label="Frontend"  skills={FRONTEND}  />
+          <SkillGroup label="Backend"   skills={BACKEND}   />
+          <SkillGroup label="Databases" skills={DATABASES} />
+        </div>
+      </Container>
+    </section>
   );
 };
 

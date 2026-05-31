@@ -1,119 +1,105 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { useState, useEffect, useLocation } from "react";
+import { useState, useEffect } from "react";
 import Logo from "../assets/img/hari1.jpg";
 import Github from "../assets/img/github.png";
 import LinkedIn from "../assets/img/linkedin.svg";
-// import { FontAwesomeIcon } from "@fortawesome/fontawesome-free";
-// import { faGithub, faLinkedin } from "@fortawesome/fontawesome-free";
+
+const SECTIONS = ["home", "skills", "projects", "contact"];
 
 const NavBar = () => {
   const [activeLink, setActiveLink] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
+  const [menuOpen, setMenuOpen]      = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll);
-
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const onUpdateActiveLink = (value) => {
-    setActiveLink(value);
-  };
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth > 768) setMenuOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
-  const ScrollToTop = () => {
-    // Extracts pathname property(key) from an object
-    const { pathname } = useLocation();
-
-    // Automatically scrolls to top whenever pathname changes
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, [pathname]);
+  const handleNavClick = (section) => {
+    setActiveLink(section);
+    setMenuOpen(false);
   };
 
   return (
-    <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
-      <Container>
-        <Navbar.Brand>
-          <img
-            src={Logo}
-            alt="Logo"
-            height="100px"
-            className="navbar-logo"
-            onClick={() =>
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              })
-            }
-          />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav">
-          <span className="navbar-toggler-icon"></span>
-        </Navbar.Toggle>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link
-              href="#home"
-              className={
-                activeLink === "home" ? "active-navbar-link" : "navbar-link"
-              }
-              onClick={() => onUpdateActiveLink("home")}
+    <header>
+      <nav
+        className={`site-nav${scrolled ? " scrolled" : ""}`}
+        aria-label="Main navigation"
+      >
+        <div className="nav-inner">
+          {/* Logo */}
+          <button
+            className="nav-logo-btn"
+            style={{ background: "none", border: "none", padding: 0 }}
+            aria-label="Scroll to top"
+            onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); setActiveLink("home"); }}
+          >
+            <img src={Logo} alt="Hari Pace" className="nav-logo" />
+          </button>
+
+          {/* Desktop nav links */}
+          <ul className={`nav-links${menuOpen ? " open" : ""}`} role="list">
+            {SECTIONS.map((s) => (
+              <li key={s}>
+                <a
+                  href={`#${s}`}
+                  className={`nav-link${activeLink === s ? " active" : ""}`}
+                  aria-current={activeLink === s ? "page" : undefined}
+                  onClick={() => handleNavClick(s)}
+                >
+                  {s.charAt(0).toUpperCase() + s.slice(1)}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Social icons */}
+          <div className="nav-actions">
+            <a
+              href="https://github.com/hari-pace"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-btn"
+              aria-label="Visit Hari's GitHub profile"
             >
-              Home
-            </Nav.Link>
-            <Nav.Link
-              href="#skills"
-              className={
-                activeLink === "skills" ? "active-navbar-link" : "navbar-link"
-              }
-              onClick={() => onUpdateActiveLink("skills")}
+              <img src={Github} alt="" aria-hidden="true" />
+            </a>
+            <a
+              href="https://linkedin.com/in/hari-pace"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-btn"
+              aria-label="Visit Hari's LinkedIn profile"
             >
-              Skills
-            </Nav.Link>
-            <Nav.Link
-              href="#projects"
-              className={
-                activeLink === "projects" ? "active-navbar-link" : "navbar-link"
-              }
-              onClick={() => onUpdateActiveLink("projects")}
+              <img src={LinkedIn} alt="" aria-hidden="true" />
+            </a>
+
+            {/* Hamburger */}
+            <button
+              className="nav-toggle"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="nav-links"
+              onClick={() => setMenuOpen((o) => !o)}
             >
-              Projects
-            </Nav.Link>
-          </Nav>
-          <span className="navbar-text">
-            <div className="social-icon">
-              <a href="https://github.com/hari-pace" target="blank">
-                {/* <div>
-                  <FontAwesomeIcon icon={faGithub} />
-                </div> */}
-                <img src={Github} alt="github" />
-              </a>
-              <a href="https://linkedin.com/in/hari-pace" target="blank">
-                {/* <div>
-                  <FontAwesomeIcon icon={faLinkedin} />
-                </div> */}
-                <img src={LinkedIn} alt="linkedin" />
-              </a>
-            </div>
-            {/* <button className="vvd" onClick={() => console.log("connect")}>
-              <span>Let's Connect</span>
-            </button> */}
-          </span>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 };
 
 export default NavBar;
+
