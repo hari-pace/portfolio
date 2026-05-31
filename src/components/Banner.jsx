@@ -11,15 +11,15 @@ const ROLES = [
 ];
 
 const Banner = () => {
-  const [ref, inView]       = useInView();
+  const [ref, inView] = useInView();
   const [displayed, setDisplayed] = useState("");
-  const [roleIdx, setRoleIdx]     = useState(0);
+  const [roleIdx, setRoleIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const fullText = ROLES[roleIdx];
-    const speed    = isDeleting ? 60 : 100;
-    const pauseMs  = 1800;
+    const speed = isDeleting ? 60 : 100;
+    const pauseMs = 1800;
 
     const timeout = setTimeout(() => {
       if (!isDeleting && displayed === fullText) {
@@ -67,9 +67,9 @@ const Banner = () => {
               </div>
 
               <p className="banner-bio">
-                Since leaving the UK for Munich in 2019, I have completed a
+                Since leaving the UK for Munich in 2019, I completed a
                 career change in order to professionally pursue a passion of
-                mine &mdash; web development. If you want to know more, feel
+                mine - web development. If you want to know more, feel
                 free to connect via LinkedIn.
               </p>
 
