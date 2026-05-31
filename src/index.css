@@ -34,6 +34,25 @@
 }
 
 /* ============================================================
+   Light theme overrides
+   ============================================================ */
+[data-theme="light"] {
+  --bg-primary:    #f0f4f8;
+  --bg-secondary:  #e2e8f0;
+  --bg-card:       #ffffff;
+  --bg-card-hover: #f8fafc;
+  --border:        rgba(0, 0, 0, 0.08);
+  --border-active: rgba(0, 0, 0, 0.18);
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #94a3b8;
+  --shadow-sm:   0 2px 8px  rgba(0, 0, 0, 0.08);
+  --shadow-md:   0 4px 24px rgba(0, 0, 0, 0.12);
+  --shadow-lg:   0 8px 48px rgba(0, 0, 0, 0.18);
+  --shadow-glow: 0 0 48px   rgba(124, 58, 237, 0.12);
+}
+
+/* ============================================================
    Fonts
    ============================================================ */
 @font-face {
@@ -78,6 +97,7 @@ body {
   overflow-x: hidden;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -295,6 +315,15 @@ a {
   filter: brightness(0) invert(1);
   transition: filter 0.2s var(--ease);
 }
+[data-theme="light"] .social-btn img {
+  filter: brightness(0);
+}
+[data-theme="light"] .social-btn {
+  background: rgba(0, 0, 0, 0.05);
+}
+[data-theme="light"] .social-btn:hover img {
+  filter: brightness(0) invert(1);
+}
 
 /* Mobile hamburger */
 .nav-toggle {
@@ -327,6 +356,16 @@ a {
 }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Light-mode nav */
+[data-theme="light"] .site-nav.scrolled {
+  background: rgba(240, 244, 248, 0.88);
+}
+@media (max-width: 768px) {
+  [data-theme="light"] .nav-links {
+    background: rgba(240, 244, 248, 0.97);
+  }
 }
 
 @media (max-width: 768px) {
@@ -395,6 +434,14 @@ a {
     rgba(7, 11, 20, 0.72) 0%,
     rgba(7, 11, 20, 0.85) 60%,
     rgba(7, 11, 20, 1)    100%
+  );
+}
+[data-theme="light"] .banner-bg::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(240, 244, 248, 0.55) 0%,
+    rgba(240, 244, 248, 0.78) 60%,
+    rgba(240, 244, 248, 1)    100%
   );
 }
 
@@ -874,4 +921,32 @@ a {
 .footer-social {
   display: flex;
   gap: 0.5rem;
+}
+
+/* ============================================================
+   Theme toggle button
+   ============================================================ */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border-active);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease),
+              transform 0.25s var(--ease), border-color 0.25s var(--ease);
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  background: var(--gradient);
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-2px);
+}
+[data-theme="light"] .theme-toggle {
+  background: rgba(0, 0, 0, 0.04);
 }

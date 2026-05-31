@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Sun, Moon } from "react-bootstrap-icons";
+import { useTheme } from "../hooks/useTheme";
 import Logo from "../assets/img/hari1.jpg";
 import Github from "../assets/img/github.png";
 import LinkedIn from "../assets/img/linkedin.svg";
@@ -9,6 +11,7 @@ const NavBar = () => {
   const [activeLink, setActiveLink] = useState("home");
   const [scrolled, setScrolled]     = useState(false);
   const [menuOpen, setMenuOpen]      = useState(false);
+  const [theme, toggleTheme]         = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -82,7 +85,18 @@ const NavBar = () => {
               <img src={LinkedIn} alt="" aria-hidden="true" />
             </a>
 
-            {/* Hamburger */}
+            {/* Theme toggle */}
+            <button
+              className="theme-toggle"
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              onClick={toggleTheme}
+            >
+              {theme === "dark"
+                ? <Sun size={17} aria-hidden="true" />
+                : <Moon size={17} aria-hidden="true" />}
+            </button>
+
+          {/* Hamburger */}
             <button
               className="nav-toggle"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
