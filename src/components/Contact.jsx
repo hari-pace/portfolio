@@ -29,10 +29,10 @@ const Contact = () => {
     }
 
     const subject = encodeURIComponent(`Portfolio enquiry from ${firstName} ${lastName}`);
-    const body    = encodeURIComponent(
+    const body = encodeURIComponent(
       `Name: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\n\n${message}`
     );
-    window.open(`mailto:hari.pace@example.com?subject=${subject}&body=${body}`);
+    window.open(`mailto:haripacedev@gmail.com?subject=${subject}&body=${body}`);
 
     setBtnText("Sent!");
     setStatus("success");
